@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * It takes a string and returns a string
+ * @param {string} source - The string to parse.
+ * @returns A string.
+ */
 export default function parseSex(source: string) {
   switch (source) {
     case 'M':

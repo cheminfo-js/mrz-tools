@@ -2,6 +2,12 @@
 
 import { parseText } from './parseText';
 
+/**
+ * It parses the optional part of a document number
+ * @param {string} optional - The optional part of the document number.
+ * @param {string} checkDigit - The check digit for the document number.
+ * @returns An object with the value, start, and end properties.
+ */
 export function parseDocumentNumberOptional(
   optional: string,
   checkDigit: string,

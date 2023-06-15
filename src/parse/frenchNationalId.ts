@@ -1,12 +1,19 @@
 'use strict';
 
 import { formats } from '../formats';
+import { ParseMRZOptions } from '../types';
 
 import frenchNationalIdFields from './frenchNationalIdFields';
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
+import getResult from './getResult';
 
 const FRENCH_NATIONAL_ID = formats.FRENCH_NATIONAL_ID;
+/**
+ * It takes an array of two strings, each of which is 36 characters long, and returns an object with
+ * the parsed data
+ * @param {string[]} lines - An array of strings, each string representing a line of the MRZ.
+ * @param {ParseMRZOptions} options - ParseMRZOptions
+ * @returns the result of the getResult function.
+ */
 export default function parseFrenchNationalId(
   lines: string[],
   options: ParseMRZOptions,

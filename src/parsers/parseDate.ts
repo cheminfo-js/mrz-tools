@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * It takes a string, checks that it's a valid date, and returns the string
+ * @param {string} value - The value to parse.
+ * @returns A string
+ */
 export default function parseDate(value: string) {
   if (!value.match(/^[0-9<]{4,6}$/)) {
     throw new Error(`invalid date: ${value}`);

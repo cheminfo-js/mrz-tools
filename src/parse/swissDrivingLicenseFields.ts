@@ -6,18 +6,19 @@ import parseDocumentCode from '../parsers/swissDrivingLicense/parseDocumentCode'
 import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNumber';
 import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState';
 import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode';
+import { FieldOptions } from '../types';
 
-import createFieldParser, { fieldTypes } from './createFieldParser';
+import { createFieldParser } from './createFieldParser';
 import {
-  documentNumberTemplate,
-  documentCodeTemplate,
-  issuingStateTemplate,
   birthDateTemplate,
-  lastNameTemplate,
+  documentCodeTemplate,
+  documentNumberTemplate,
   firstNameTemplate,
+  issuingStateTemplate,
+  lastNameTemplate,
 } from './fieldTemplates';
 
-export default [
+const swissDrivingLicense: FieldOptions[] = [
   {
     ...documentNumberTemplate,
     line: 0,
@@ -32,7 +33,7 @@ export default [
     start: 6,
     end: 7,
     parser: parseLanguageCode,
-    type: fieldTypes.ALPHABETIC,
+    type: 'ALPHABETIC',
   },
   {
     ...documentCodeTemplate,
@@ -55,7 +56,7 @@ export default [
     start: 5,
     end: 14,
     parser: parseNumber,
-    type: fieldTypes.NUMERIC,
+    type: 'NUMERIC',
   },
   {
     label: 'Version number',
@@ -64,7 +65,7 @@ export default [
     start: 14,
     end: 17,
     parser: parseNumber,
-    type: fieldTypes.NUMERIC,
+    type: 'NUMERIC',
   },
   {
     label: 'Separator 1',
@@ -85,4 +86,6 @@ export default [
   },
   { ...lastNameTemplate, line: 2, start: 0, end: 30 },
   { ...firstNameTemplate, line: 2, start: 0, end: 30 },
-].map(createFieldParser);
+];
+
+export default swissDrivingLicense.map(createFieldParser);

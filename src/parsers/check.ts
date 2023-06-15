@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * It takes a string and a check digit, and throws an error if the check digit is invalid
+ * @param {string} string - The string to check.
+ * @param {string | number} value - The value to check.
+ */
 export function check(string: string, value: string | number) {
   let code = 0;
   const factors = [7, 3, 1];

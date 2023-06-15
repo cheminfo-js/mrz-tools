@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * It takes a string and returns a string
+ * @param {string} source - The string to parse.
+ * @returns A string or an object.
+ */
 export default function parseDocumentCodeId(source: string) {
   const first = source.charAt(0);
   if (first !== 'A' && first !== 'C' && first !== 'I') {

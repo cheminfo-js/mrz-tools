@@ -9,104 +9,103 @@ import parseFirstName from '../parsers/parseFirstName';
 import parseLastName from '../parsers/parseLastName';
 import parseSex from '../parsers/parseSex';
 import parseState from '../parsers/parseState';
+import { TemplateDetails } from '../types';
 
-import { fieldTypes } from './createFieldParser';
-
-const documentNumberTemplate = {
+const documentNumberTemplate: TemplateDetails = {
   label: 'Document number',
   field: 'documentNumber',
   parser: parseDocumentNumber,
-  type: fieldTypes.ALPHANUMERIC,
+  type: 'ALPHANUMERIC',
 };
 
-const documentNumberCheckDigitTemplate = {
+const documentNumberCheckDigitTemplate: TemplateDetails = {
   label: 'Document number check digit',
   field: 'documentNumberCheckDigit',
   parser: parseDocumentNumberCheckDigit,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const documentCodeTemplate = {
+const documentCodeTemplate: TemplateDetails = {
   label: 'Document code',
   field: 'documentCode',
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
-const nationalityTemplate = {
+const nationalityTemplate: TemplateDetails = {
   label: 'Nationality',
   field: 'nationality',
   parser: parseState,
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
-const sexTemplate = {
+const sexTemplate: TemplateDetails = {
   label: 'Sex',
   field: 'sex',
   parser: parseSex,
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
-const expirationDateTemplate = {
+const expirationDateTemplate: TemplateDetails = {
   label: 'Expiration date',
   field: 'expirationDate',
   parser: parseDate,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const expirationDateCheckDigitTemplate = {
+const expirationDateCheckDigitTemplate: TemplateDetails = {
   label: 'Expiration date check digit',
   field: 'expirationDateCheckDigit',
   parser: parseDateCheckDigit,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const compositeCheckDigitTemplate = {
+const compositeCheckDigitTemplate: TemplateDetails = {
   label: 'Composite check digit',
   field: 'compositeCheckDigit',
   parser: parseCompositeCheckDigit,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const birthDateTemplate = {
+const birthDateTemplate: TemplateDetails = {
   label: 'Birth date',
   field: 'birthDate',
   parser: parseDate,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const birthDateCheckDigitTemplate = {
+const birthDateCheckDigitTemplate: TemplateDetails = {
   label: 'Birth date check digit',
   field: 'birthDateCheckDigit',
   parser: parseDateCheckDigit,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const issueDateTemplate = {
+const issueDateTemplate: TemplateDetails = {
   label: 'Issue date',
   field: 'issueDate',
   parser: parseDate,
-  type: fieldTypes.NUMERIC,
+  type: 'NUMERIC',
 };
 
-const firstNameTemplate = {
+const firstNameTemplate: TemplateDetails = {
   label: 'First name',
   field: 'firstName',
   parser: parseFirstName,
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
-const lastNameTemplate = {
+const lastNameTemplate: TemplateDetails = {
   label: 'Last name',
   field: 'lastName',
   parser: parseLastName,
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
-const issuingStateTemplate = {
+const issuingStateTemplate: TemplateDetails = {
   label: 'Issuing state',
   field: 'issuingState',
   parser: parseState,
-  type: fieldTypes.ALPHABETIC,
+  type: 'ALPHABETIC',
 };
 
 export {

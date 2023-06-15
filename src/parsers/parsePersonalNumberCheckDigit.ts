@@ -3,6 +3,12 @@
 import { check } from './check';
 import { cleanText } from './cleanText';
 
+/**
+ * It takes a string and a string and returns a string
+ * @param {string} checkDigit - the check digit from the personal number
+ * @param {string} personalNumber - The personal number to check.
+ * @returns The check digit is being returned.
+ */
 export function parsePersonalNumberCheckDigit(
   checkDigit: string,
   personalNumber: string,

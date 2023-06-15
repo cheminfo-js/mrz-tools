@@ -1,11 +1,16 @@
 'use strict';
 
+import { ParseMRZOptions } from '../types';
 import { checkLines } from './checkLines';
 import { parsers } from './parsers';
 
-export interface ParseMRZOptions {
-  autocorrect?: boolean;
-}
+/**
+ * It takes a string or an array of strings, checks that the input is valid, and then calls the
+ * appropriate parser function
+ * @param {string | string[]} inputLines - string | string[]
+ * @param {ParseMRZOptions} options - ParseMRZOptions = {}
+ * @returns the result of the parsers.td1 function.
+ */
 function parseMRZ(
   inputLines: string | string[],
   options: ParseMRZOptions = {},

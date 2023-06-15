@@ -2,8 +2,9 @@
 
 import parseDocumentCode from '../parsers/parseDocumentCodeId';
 import { parseOptional } from '../parsers/parseOptional';
+import { FieldOptions } from '../types';
 
-import createFieldParser from './createFieldParser';
+import { createFieldParser } from './createFieldParser';
 import {
   documentCodeTemplate,
   issuingStateTemplate,
@@ -20,7 +21,7 @@ import {
   compositeCheckDigitTemplate,
 } from './fieldTemplates';
 
-export default [
+const td2Fields: FieldOptions[] = [
   {
     ...documentCodeTemplate,
     line: 0,
@@ -128,4 +129,6 @@ export default [
       },
     ],
   },
-].map(createFieldParser);
+];
+
+export default td2Fields.map(createFieldParser);

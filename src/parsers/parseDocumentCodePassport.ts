@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * It takes a string and returns a string or an object
+ * @param {string} source - The string to parse.
+ * @returns A string
+ */
 export default function parseDocumentCodePassport(source: string) {
   const first = source.charAt(0);
   if (first !== 'P') {

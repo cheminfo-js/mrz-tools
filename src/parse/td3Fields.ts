@@ -3,25 +3,26 @@
 import parseDocumentCode from '../parsers/parseDocumentCodePassport';
 import { parsePersonalNumber } from '../parsers/parsePersonalNumber';
 import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit';
+import { FieldOptions } from '../types';
 
-import createFieldParser from './createFieldParser';
+import { createFieldParser } from './createFieldParser';
 import {
+  birthDateCheckDigitTemplate,
+  birthDateTemplate,
+  compositeCheckDigitTemplate,
   documentCodeTemplate,
+  documentNumberCheckDigitTemplate,
+  documentNumberTemplate,
+  expirationDateCheckDigitTemplate,
+  expirationDateTemplate,
+  firstNameTemplate,
   issuingStateTemplate,
   lastNameTemplate,
-  firstNameTemplate,
-  documentNumberTemplate,
-  documentNumberCheckDigitTemplate,
   nationalityTemplate,
-  birthDateTemplate,
-  birthDateCheckDigitTemplate,
   sexTemplate,
-  expirationDateTemplate,
-  expirationDateCheckDigitTemplate,
-  compositeCheckDigitTemplate,
 } from './fieldTemplates';
 
-export default [
+const td3Fields: FieldOptions[] = [
   {
     ...documentCodeTemplate,
     line: 0,
@@ -122,4 +123,6 @@ export default [
       },
     ],
   },
-].map(createFieldParser);
+];
+
+export default td3Fields.map(createFieldParser);

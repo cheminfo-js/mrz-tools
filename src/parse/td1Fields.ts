@@ -3,25 +3,26 @@
 import parseDocumentCode from '../parsers/parseDocumentCodeId';
 import { parseDocumentNumberOptional } from '../parsers/parseDocumentNumberOptional';
 import { parseOptional } from '../parsers/parseOptional';
+import { FieldOptions } from '../types';
 
-import createFieldParser from './createFieldParser';
+import { createFieldParser } from './createFieldParser';
 import {
-  documentCodeTemplate,
-  issuingStateTemplate,
-  documentNumberTemplate,
-  documentNumberCheckDigitTemplate,
-  birthDateTemplate,
   birthDateCheckDigitTemplate,
-  sexTemplate,
-  expirationDateTemplate,
-  expirationDateCheckDigitTemplate,
-  nationalityTemplate,
+  birthDateTemplate,
   compositeCheckDigitTemplate,
-  lastNameTemplate,
+  documentCodeTemplate,
+  documentNumberCheckDigitTemplate,
+  documentNumberTemplate,
+  expirationDateCheckDigitTemplate,
+  expirationDateTemplate,
   firstNameTemplate,
+  issuingStateTemplate,
+  lastNameTemplate,
+  nationalityTemplate,
+  sexTemplate,
 } from './fieldTemplates';
 
-export default [
+const td1Fields: FieldOptions[] = [
   {
     ...documentCodeTemplate,
     line: 0,
@@ -154,4 +155,6 @@ export default [
   },
   { ...lastNameTemplate, line: 2, start: 0, end: 30 },
   { ...firstNameTemplate, line: 2, start: 0, end: 30 },
-].map(createFieldParser);
+];
+
+export default td1Fields.map(createFieldParser);

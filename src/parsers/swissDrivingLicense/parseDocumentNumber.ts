@@ -2,6 +2,13 @@
 
 import parseLanguageCode from './parseLanguageCode';
 
+/**
+ * It parses a string that starts with three alphanumeric digits, followed by three numeric digits,
+ * followed by a language code, followed by <<
+ * @param {string} source - The string to parse.
+ * @returns An object with the value of the document number, the start and end positions of the
+ * document number.
+ */
 export default function parseDocumentNumber(source: string) {
   // swiss driving license number
   const first = source.substring(0, 3);

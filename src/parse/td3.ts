@@ -1,12 +1,19 @@
 'use strict';
 
 import { formats } from '../formats';
+import { ParseMRZOptions } from '../types';
+import getResult from './getResult';
 
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
 import TD3Fields from './td3Fields';
 
 const TD3 = formats.TD3;
+/**
+ * It takes an array of two strings, each of which is 44 characters long, and returns an object with
+ * the parsed data
+ * @param {string[]} lines - An array of strings, each string representing a line of the MRZ.
+ * @param {ParseMRZOptions} options - ParseMRZOptions
+ * @returns the result of the getResult function.
+ */
 export default function parseTD3(lines: string[], options: ParseMRZOptions) {
   if (lines.length !== 2) {
     throw new Error(

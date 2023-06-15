@@ -2,6 +2,13 @@
 
 import { check } from './check';
 
+/**
+ * It checks the check digit of a document number
+ * @param {string} checkDigit - The check digit that was found in the document number.
+ * @param {string} source - the document number without the check digit
+ * @param {string} optional - The optional part of the MRZ.
+ * @returns an object with the value, start, and end properties.
+ */
 export default function parseDocumentNumberCheckDigit(
   checkDigit: string,
   source: string,

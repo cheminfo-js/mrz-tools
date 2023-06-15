@@ -1,60 +1,20 @@
 'use strict';
 
-import { Autocorrect, autoCorrection } from './autoCorrection';
+import {
+  Autocorrect,
+  CreateFieldParserResult,
+  Details,
+  FieldOptions,
+  Range,
+} from '../types';
+import { autoCorrection } from './autoCorrection';
 
-export interface Details {
-  label: string;
-  field: string | null;
-  value: string | null;
-  valid: boolean;
-  ranges: Range[];
-  line: number;
-  start: number;
-  end: number;
-  error?: string;
-  autocorrect: Autocorrect[];
-}
-
-interface ParseResult {
-  value: string;
-  start: number;
-  end: number;
-}
-
-type Parser = (source: string, ...related: string[]) => ParseResult | string;
-
-type FieldTypes = keyof typeof fieldTypes;
-export const fieldTypes = {
-  NUMERIC: 'NUMERIC',
-  ALPHABETIC: 'ALPHABETIC',
-  ALPHANUMERIC: 'ALPHANUMERIC',
-} as const;
-
-export type FieldOptions = {
-  label: string;
-  field: string | null;
-  line: number;
-  start: number;
-  end: number;
-  parser: Parser;
-  related?: Range[];
-  type?: FieldTypes;
-};
-interface Range {
-  line: number;
-  start: number;
-  end: number;
-}
-
-export interface CreateFieldParserResult {
-  parser: (lines: string[], autocorrect?: Autocorrect[]) => Details;
-  autocorrector: (lines: string[]) => {
-    correctedLines: string[];
-    autocorrect: Autocorrect[];
-  };
-}
-
-export default function createFieldParser(
+/**
+ * It takes a fieldOptions object and returns a parser function and an autocorrector function
+ * @param {FieldOptions} fieldOptions - This is an object that contains the following properties:
+ * @returns A function that takes in a string and returns a string.
+ */
+export function createFieldParser(
   fieldOptions: FieldOptions,
 ): CreateFieldParserResult {
   checkType(fieldOptions, 'label', 'string');
@@ -106,12 +66,14 @@ export default function createFieldParser(
     result.start = range.start;
     result.end = range.end;
     try {
-      const parsed = fieldOptions.parser(source, ...textRelated);
-      result.value = typeof parsed === 'object' ? parsed.value : parsed;
-      result.valid = true;
-      if (typeof parsed === 'object') {
-        result.start = range.start + parsed.start;
-        result.end = range.start + parsed.end;
+      if (fieldOptions.parser !== undefined) {
+        const parsed = fieldOptions.parser(source, ...textRelated);
+        result.value = typeof parsed === 'object' ? parsed.value : parsed;
+        result.valid = true;
+        if (typeof parsed === 'object') {
+          result.start = range.start + parsed.start;
+          result.end = range.start + parsed.end;
+        }
       }
     } catch (e: any) {
       result.error = e.message;
@@ -122,8 +84,8 @@ export default function createFieldParser(
     let corrected = lines;
     let source = getText(lines, fieldOptions);
     let autocorrect: Autocorrect[] = [];
-    const type = fieldOptions.type || fieldTypes.ALPHANUMERIC;
-    if (type !== fieldTypes.ALPHANUMERIC) {
+    const type = fieldOptions.type || 'ALPHANUMERIC';
+    if (type !== 'ALPHANUMERIC') {
       const result = autoCorrection(source, fieldOptions);
       source = result.correctedLine;
       autocorrect = result.autocorrect;
@@ -134,6 +96,13 @@ export default function createFieldParser(
   return { parser, autocorrector };
 }
 
+/**
+ * `getText` takes a string or an array of strings and an object with `line`, `end`, and `start`
+ * properties and returns a string
+ * @param {string | string[]} lines - string | string[]
+ * @param options - Pick<FieldOptions, 'line' | 'end' | 'start'>
+ * @returns The text between the start and end of the line.
+ */
 function getText(
   lines: string | string[],
   options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
@@ -142,6 +111,13 @@ function getText(
   return line.substring(options.start, options.end);
 }
 
+/**
+ * It takes a line of text, and replaces a portion of it with some new text
+ * @param {string[]} lines - The lines of the file.
+ * @param options - This is the object that contains the line, start, and end properties.
+ * @param {string} text - The text to be inserted
+ * @returns The lines array with the new text inserted.
+ */
 function changeText(
   lines: string[],
   options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
@@ -154,6 +130,13 @@ function changeText(
   return lines;
 }
 
+/**
+ * If the type of the property named name on the object options is not the type type, throw a
+ * TypeError.
+ * @param {object} options - object - The object to check.
+ * @param {string} name - The name of the option to check.
+ * @param {'string' | 'number' | 'function'} type - 'string' | 'number' | 'function'
+ */
 function checkType(
   options: object,
   name: string,

@@ -1,12 +1,18 @@
 'use strict';
 
 import { formats } from '../formats';
-
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
+import { ParseMRZOptions } from '../types';
+import getResult from './getResult';
 import swissDrivingLicenseFields from './swissDrivingLicenseFields';
 
 const SWISS_DRIVING_LICENSE = formats.SWISS_DRIVING_LICENSE;
+/**
+ * It checks that the number of lines is 3, that the number of characters in each line is correct, and
+ * then calls the `getResult` function
+ * @param {string[]} lines - string[]
+ * @param {ParseMRZOptions} options - ParseMRZOptions
+ * @returns the result of the getResult function.
+ */
 export default function parseSwissDrivingLicense(
   lines: string[],
   options: ParseMRZOptions,
